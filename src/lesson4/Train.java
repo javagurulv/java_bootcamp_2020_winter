@@ -1,4 +1,4 @@
-package lesson5;
+package lesson4;
 
 public class Train {
 
