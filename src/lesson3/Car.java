@@ -8,6 +8,15 @@ public class Car {
     private int currentSpeed;
     private boolean engineOnOff;
 
+    public Car(String  name) {
+        this.name = name;
+    }
+
+    public Car(String name, String model) {
+        this.name = name;
+        this.model = model;
+    }
+
     public Car(String name, String model, String color) {
         this.name = name;
         this.model = model;
