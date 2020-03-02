@@ -30,9 +30,9 @@ public class StockV2Test {
         stock.updatePrice(7);
         String stockInfo = stock.getInformation();
         if(stockInfo.equals("Stock name: TESL Current price: 7.00 Minimum price: 1.00 Maximum price: 45.00")) {
-            System.out.println("TEST 1 = OK");
+            System.out.println("TEST 2 = OK");
         } else {
-            System.out.println("TEST 1 = FAIL");
+            System.out.println("TEST 2 = FAIL");
         }
     }
 
@@ -46,9 +46,9 @@ public class StockV2Test {
         stock.updatePrice(27);
         String stockInfo = stock.getInformation();
         if(stockInfo.equals("Stock name: INTE Current price: 27.00 Minimum price: 1.00 Maximum price: 33.00")) {
-            System.out.println("TEST 1 = OK");
+            System.out.println("TEST 3 = OK");
         } else {
-            System.out.println("TEST 1 = FAIL");
+            System.out.println("TEST 3 = FAIL");
         }
     }
 
