@@ -3,13 +3,24 @@ package lesson12;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TransactionServiceTest {
 
     private TransactionStorage storage = new TransactionStorage();
     private TransactionService service = new TransactionService();
+
+    @Test
+    public void testQuestion2() {
+        List<Transaction> transactions = storage.getTransactions();
+        Set<String> uniqueCities = service.findUniqueCities(transactions);
+        assertEquals(uniqueCities.size(), 2);
+        assertTrue(uniqueCities.contains("Cambridge"));
+        assertTrue(uniqueCities.contains("Milan"));
+    }
 
     @Test
     public void testQuestion1() {
