@@ -8,19 +8,28 @@ public class TransactionService {
 
     /*
     1. Find all transactions in the year 2011
+
         and sort them by value (small to high).
      */
-    public List<Transaction> question1(List<Transaction> transactions) {
+
+    public List<Transaction> filterBy2011Year(List<Transaction> transactions) {
         List<Transaction> transactions2011 = new ArrayList<>();
         for (Transaction transaction : transactions) {
             if (transaction.getYear() == 2011) {
                 transactions2011.add(transaction);
             }
         }
+        return transactions2011;
+    }
 
+    public void sortTransactionsByVolume(List<Transaction> transactions) {
         TransactionYearComparator comparator = new TransactionYearComparator();
-        transactions2011.sort(comparator);
+        transactions.sort(comparator);
+    }
 
+    public List<Transaction> question1(List<Transaction> transactions) {
+        List<Transaction> transactions2011 = filterBy2011Year(transactions);
+        sortTransactionsByVolume(transactions2011);
         return transactions2011;
     }
 
