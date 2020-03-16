@@ -12,14 +12,15 @@ public class TransactionService {
         and sort them by value (small to high).
      */
 
-    public List<Transaction> filterBy2011Year(List<Transaction> transactions) {
-        List<Transaction> transactions2011 = new ArrayList<>();
+    public List<Transaction> filterByYear(List<Transaction> transactions,
+                                          int targetYear) {
+        List<Transaction> transactionsByYear = new ArrayList<>();
         for (Transaction transaction : transactions) {
-            if (transaction.getYear() == 2011) {
-                transactions2011.add(transaction);
+            if (transaction.getYear() == targetYear) {
+                transactionsByYear.add(transaction);
             }
         }
-        return transactions2011;
+        return transactionsByYear;
     }
 
     public void sortTransactionsByVolume(List<Transaction> transactions) {
@@ -28,7 +29,7 @@ public class TransactionService {
     }
 
     public List<Transaction> question1(List<Transaction> transactions) {
-        List<Transaction> transactions2011 = filterBy2011Year(transactions);
+        List<Transaction> transactions2011 = filterByYear(transactions, 2011);
         sortTransactionsByVolume(transactions2011);
         return transactions2011;
     }
