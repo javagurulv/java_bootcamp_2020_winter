@@ -1,8 +1,52 @@
 package lesson12;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TransactionService {
+
+    public List<Transaction> searchUsingStreamApi(
+            List<Transaction> transactions,
+            SearchCriteria searchCriteria) {
+        return transactions.stream()
+                .filter(transaction -> searchCriteria.test(transaction))
+                /*
+                .filter(transaction -> transaction.getYear() == 2011)
+                .filter(new Predicate<Transaction>() {
+                    @Override
+                    public boolean test(Transaction transaction) {
+                        return transaction.getYear() == 2011;
+                    }
+                })*/
+                .collect(Collectors.toList());
+    }
+
+    public List<Transaction> search(List<Transaction> transactions,
+                                    SearchCriteria searchCriteria) {
+        List<Transaction> foundTransactions = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (searchCriteria.test(transaction)) {
+                foundTransactions.add(transaction);
+            }
+        }
+        return foundTransactions;
+    }
+
+
+    public List<Transaction> filterByTraderCity(List<Transaction> transactions,
+                                                String traderCity) {
+        List<Transaction> transactionsByTraderCity = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            Trader trader = transaction.getTrader();
+            if (trader.getCity().equals(traderCity)) {
+                transactionsByTraderCity.add(transaction);
+            }
+        }
+        return transactionsByTraderCity;
+    }
+
+
 
     /*
     1. Find all transactions in the year 2011

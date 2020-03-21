@@ -14,6 +14,24 @@ public class TransactionServiceTest {
     private TransactionService service = new TransactionService();
 
     @Test
+    public void searchByYear() {
+        List<Transaction> transactions = storage.getTransactions();
+        SearchCriteria searchCriteria = new SearchCriteriaByYear(2011);
+        List<Transaction> foundTransactions =
+                service.search(transactions, searchCriteria);
+        assertEquals(foundTransactions.size(), 2);
+    }
+
+    @Test
+    public void searchByTraderCity() {
+        List<Transaction> transactions = storage.getTransactions();
+        SearchCriteria searchCriteria = new SearchCriteriaByTraderCity("Milan");
+        List<Transaction> foundTransactions =
+                service.search(transactions, searchCriteria);
+        assertEquals(foundTransactions.size(), 2);
+    }
+
+    @Test
     public void testQuestion2() {
         List<Transaction> transactions = storage.getTransactions();
         Set<String> uniqueCities = service.findUniqueCities(transactions);
