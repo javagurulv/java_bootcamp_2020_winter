@@ -3,15 +3,41 @@ package lesson12;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TransactionServiceTest {
 
     private TransactionStorage storage = new TransactionStorage();
     private TransactionService service = new TransactionService();
+
+    @Test
+    public void testFindAllTraderNames() {
+        List<Transaction> transactions = storage.getTransactions();
+        String traderNames = service.findAllTraderNames(transactions);
+        //System.out.println(traderNames);
+        assertEquals(traderNames, "Alan,Brian,Mario,Raoul");
+    }
+
+    @Test
+    public void testFindSmallestTransactionByValue() {
+        List<Transaction> transactions = storage.getTransactions();
+        Optional<Transaction> opt =
+                service.findSmallestTransactionByValue(transactions);
+        if (opt.isPresent()) {
+            Transaction smallestTransaction = opt.get();
+            assertNotNull(smallestTransaction);
+        } else {
+            System.out.println("Smallest transaction not found!");
+        }
+
+        //opt = Optional.empty();
+
+        //opt = Optional.of(new Transaction(....));
+
+    }
 
     @Test
     public void searchByYear() {

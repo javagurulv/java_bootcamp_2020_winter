@@ -6,6 +6,53 @@ import java.util.stream.Collectors;
 
 public class TransactionService {
 
+    // 5. Are any traders based in Milan?
+    public boolean isAnyTradeLocatedInMilan(List<Transaction> transactions) {
+        return transactions.stream()
+                .map(Transaction::getTrader)
+                .map(Trader::getCity)
+                .anyMatch(city -> city.equals("Milan"));
+    }
+
+    public long countTradeLocatedInMilan(List<Transaction> transactions) {
+        return transactions.stream()
+                .map(Transaction::getTrader)
+                .filter(trader -> trader.getCity().equals("Milan"))
+                .distinct()
+                .count();
+    }
+
+    //4. Return a string of all traders’
+    // names sorted alphabetically.
+    public String findAllTraderNames(List<Transaction> transactions) {
+        return transactions.stream()
+                .map(transaction -> transaction.getTrader().getName())
+                .distinct()
+                .sorted()
+                .collect(Collectors.joining(","));
+    }
+
+    //8. Find the transaction with the smallest value
+    public Optional<Transaction> findSmallestTransactionByValue(List<Transaction> transactions) {
+        return transactions.stream()
+                .min(new TransactionComparatorByValue());
+    }
+
+
+    // get unique years
+    public Set<Integer> findAllUniqueTransactionYears(List<Transaction> transactions) {
+        return transactions.stream()
+                //.map(Transaction::getYear)
+                .map(transaction -> transaction.getYear())
+                .collect(Collectors.toSet());
+    }
+
+    // get unique traders
+
+
+    // get unique trader cities
+
+
     public List<Transaction> searchUsingStreamApi(
             List<Transaction> transactions,
             SearchCriteria searchCriteria) {
