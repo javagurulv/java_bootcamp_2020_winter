@@ -1,10 +1,30 @@
 package lesson12;
 
+import java.lang.annotation.Target;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class TransactionService {
+
+    //6. Print all transactions’ values
+    //from the traders living in Cambridge.
+    public String question6(List<Transaction> transactions) {
+        return transactions.stream()
+                //.filter(transaction -> transaction.getTrader().getCity().equals("Cambridge"))
+                .filter(this::transactionFromCambridge)
+                .map(transaction -> transaction.getValue())
+                .map(value -> value.toString())
+                .collect(Collectors.joining(","));
+
+    }
+
+    private boolean transactionFromCambridge(Transaction transaction) {
+        Trader trader = transaction.getTrader();
+        return trader.getCity().equals("Cambridge");
+    }
+
+
 
     // 5. Are any traders based in Milan?
     public boolean isAnyTradeLocatedInMilan(List<Transaction> transactions) {
@@ -143,7 +163,8 @@ Questions:
 3. Find all traders from Cambridge and sort them by name.
 4. Return a string of all traders’ names sorted alphabetically.
 5. Are any traders based in Milan?
-6. Print all transactions’ values from the traders living in Cambridge.
+6. Print all transactions’ values
+from the traders living in Cambridge.
 7. What’s the highest value of all the transactions?
 8. Find the transaction with the smallest value
 
